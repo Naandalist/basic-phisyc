@@ -21,6 +21,8 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  fluttertoast: ^7.1.6
+  giffy_dialog: ^1.8.0
   flutter:
     sdk: flutter
 
@@ -45,9 +47,11 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+    - assets/animate/animation_500_error.gif
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

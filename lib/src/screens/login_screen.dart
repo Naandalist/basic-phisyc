@@ -194,7 +194,9 @@ class _LoginScreenState extends State<LoginScreen> {
     } else if (_passwordController.text.length < 6) {
       ErrorMessage.flash("Password field can't less than 6 digits");
     } else {
-      print('Ready to login');
+      // print('Ready to login');
+      ErrorMessage.giffy(
+          'Login Failed', 'Invalid Username or Password.', context);
       // _errorGiffyMessage('Login Failed', 'Invalid Username or Password.')
 
     }
@@ -210,31 +212,31 @@ class _LoginScreenState extends State<LoginScreen> {
   //       fontSize: 16.0);
   // }
 
-  void _errorGiffyMessage(title, desc) {
-    showDialog(
-        context: context,
-        builder: (_) => AssetGiffyDialog(
-              // key: keys[5],
-              image: Image.asset(
-                'assets/animate/animation_500_error.gif',
-                fit: BoxFit.cover,
-              ),
-              title: Text(
-                title,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
-              ),
-              entryAnimation: EntryAnimation.BOTTOM_RIGHT,
-              description: Text(
-                desc,
-                textAlign: TextAlign.center,
-                style: TextStyle(),
-              ),
-              onlyOkButton: true,
-              buttonOkColor: Color(0xff6D214F),
-              onOkButtonPressed: () {
-                Navigator.of(context).pop();
-              },
-            ));
-  }
+  // void _errorGiffyMessage(title, desc) {
+  //   showDialog(
+  //       context: context,
+  //       builder: (_) => AssetGiffyDialog(
+  //             // key: keys[5],
+  //             image: Image.asset(
+  //               'assets/animate/animation_500_error.gif',
+  //               fit: BoxFit.cover,
+  //             ),
+  //             title: Text(
+  //               title,
+  //               textAlign: TextAlign.center,
+  //               style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
+  //             ),
+  //             entryAnimation: EntryAnimation.BOTTOM_RIGHT,
+  //             description: Text(
+  //               desc,
+  //               textAlign: TextAlign.center,
+  //               style: TextStyle(),
+  //             ),
+  //             onlyOkButton: true,
+  //             buttonOkColor: Color(0xff6D214F),
+  //             onOkButtonPressed: () {
+  //               Navigator.of(context).pop();
+  //             },
+  //           ));
+  // }
 }
