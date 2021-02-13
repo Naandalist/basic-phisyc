@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:basicPhisyc/src/helpers/bezier_container.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
+import 'package:basicPhisyc/src/helpers/error_messages.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key, this.title}) : super(key: key);
@@ -11,23 +14,77 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  Widget _entryField(String title, String hint, {bool isPassword = false}) {
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  Widget _entryUsernameField() {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            'Username',
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
+              fontSize: 15,
+              fontFamily: "Nunito",
+            ),
           ),
           SizedBox(
             height: 10,
           ),
           TextField(
-              obscureText: isPassword,
+              controller: _usernameController,
+              obscureText: false,
               decoration: InputDecoration(
-                  hintText: hint,
+                  hintText: 'e.g. udacode17',
+                  prefixIcon: Icon(
+                    Icons.person,
+                    color: Color(0xff6D214F),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Color(0xff6D214F), width: 2.0),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Color(0xff6D214F), width: 1.0),
+                  ),
+                  border: OutlineInputBorder(),
+                  fillColor: Color(0xFFFFFF),
+                  filled: true))
+        ],
+      ),
+    );
+  }
+
+  Widget _entryPasswordField() {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            'Password',
+            style: TextStyle(
+              fontWeight: FontWeight.w800,
+              fontSize: 15,
+              fontFamily: "Nunito",
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          TextField(
+              controller: _passwordController,
+              obscureText: true,
+              decoration: InputDecoration(
+                  hintText: '••••••',
+                  prefixIcon: Icon(
+                    Icons.lock,
+                    color: Color(0xff6D214F),
+                  ),
                   focusedBorder: OutlineInputBorder(
                     borderSide:
                         BorderSide(color: Color(0xff6D214F), width: 2.0),
@@ -45,52 +102,49 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _submitButton() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(vertical: 15),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
+    return RaisedButton(
+      onPressed: () => _validateLogin(),
+      textColor: Colors.white,
+      padding: EdgeInsets.all(0.0),
+      child: Container(
+        alignment: Alignment.center,
+        width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.all(15.0),
+        decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(5)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.grey.shade200,
-                offset: Offset(2, 4),
-                blurRadius: 5,
-                spreadRadius: 2)
-          ],
           gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [Color(0x59B33771), Color(0xff6D214F)])),
-      child: Text(
-        'Login',
-        style: TextStyle(
-            fontSize: 20,
-            color: Colors.white,
-            fontFamily: "Nunito",
-            fontWeight: FontWeight.bold),
+            colors: <Color>[
+              Color(0x59B33771),
+              Color(0xff6D214F),
+            ],
+          ),
+        ),
+        child: Text('Login',
+            style: TextStyle(
+              fontSize: 20,
+              fontFamily: "Nunito",
+              fontWeight: FontWeight.bold,
+            )),
       ),
     );
   }
 
   Widget _title() {
-    return Align(
-        alignment: Alignment.centerLeft,
-        child: Text("Basic Phisyc",
-            textScaleFactor: 1.5,
-            style: TextStyle(
-                fontFamily: "Nunito",
-                fontWeight: FontWeight.w900,
-                fontSize: 20,
-                color: Color(0xff6D214F))));
+    return Container(
+        child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text("Basic Phisyc",
+                textScaleFactor: 1.5,
+                style: TextStyle(
+                    fontFamily: "Nunito",
+                    fontWeight: FontWeight.w900,
+                    fontSize: 20,
+                    color: Color(0xff6D214F)))));
   }
 
   Widget _emailPasswordWidget() {
     return Column(
-      children: <Widget>[
-        _entryField("Username", 'e.g. udacode17'),
-        _entryField("Password", '******', isPassword: true),
-      ],
+      children: <Widget>[_entryUsernameField(), _entryPasswordField()],
     );
   }
 
@@ -119,6 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: 50),
                   _emailPasswordWidget(),
                   SizedBox(height: 20),
+                  // _submitButton(),
                   _submitButton(),
                 ],
               ),
@@ -127,5 +182,59 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     ));
+  }
+
+  void _validateLogin() {
+    if (_usernameController.text.isEmpty && _usernameController.text.isEmpty) {
+      ErrorMessage.flash("Username & Password field can't empty");
+    } else if (_usernameController.text.isEmpty) {
+      ErrorMessage.flash("Username field can't empty");
+    } else if (_passwordController.text.isEmpty) {
+      ErrorMessage.flash("Password field can't empty");
+    } else if (_passwordController.text.length < 6) {
+      ErrorMessage.flash("Password field can't less than 6 digits");
+    } else {
+      print('Ready to login');
+      // _errorGiffyMessage('Login Failed', 'Invalid Username or Password.')
+
+    }
+  }
+
+  // void _errorFlashMessage(message) {
+  //   Fluttertoast.showToast(
+  //       msg: message,
+  //       toastLength: Toast.LENGTH_SHORT,
+  //       gravity: ToastGravity.BOTTOM,
+  //       backgroundColor: Color(0xffeb3b5a),
+  //       textColor: Colors.white,
+  //       fontSize: 16.0);
+  // }
+
+  void _errorGiffyMessage(title, desc) {
+    showDialog(
+        context: context,
+        builder: (_) => AssetGiffyDialog(
+              // key: keys[5],
+              image: Image.asset(
+                'assets/animate/animation_500_error.gif',
+                fit: BoxFit.cover,
+              ),
+              title: Text(
+                title,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
+              ),
+              entryAnimation: EntryAnimation.BOTTOM_RIGHT,
+              description: Text(
+                desc,
+                textAlign: TextAlign.center,
+                style: TextStyle(),
+              ),
+              onlyOkButton: true,
+              buttonOkColor: Color(0xff6D214F),
+              onOkButtonPressed: () {
+                Navigator.of(context).pop();
+              },
+            ));
   }
 }
