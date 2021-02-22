@@ -187,13 +187,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _validateLogin() {
     if (_usernameController.text.isEmpty && _usernameController.text.isEmpty) {
-      ErrorMessage.flash("Username & Password field can't empty");
+      ErrorMessage.flash("Username & Password Harus Diisi");
     } else if (_usernameController.text.isEmpty) {
-      ErrorMessage.flash("Username field can't empty");
+      ErrorMessage.flash("Username harus Diisi");
     } else if (_passwordController.text.isEmpty) {
-      ErrorMessage.flash("Password field can't empty");
+      ErrorMessage.flash("Password Harus Diisi");
     } else if (_passwordController.text.length < 6) {
-      ErrorMessage.flash("Password field can't less than 6 digits");
+      ErrorMessage.flash("Password Harus Lebih dari 6 Digit");
     } else if (_usernameController.text == credentials.registeredUsername ||
         _passwordController.text == credentials.registeredPassword) {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
@@ -201,7 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
       }));
     } else {
       ErrorMessage.giffy(
-          'Login Failed', 'Invalid sUsername or Password.', context);
+          'Login Gagal', 'Username atau Password Tidak Valid.', context);
     }
   }
 }
