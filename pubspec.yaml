@@ -52,6 +52,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
     - assets/animate/animation_500_error.gif
     - assets/animate/animation_500_counting.gif
+    - assets/animate/animation_men_wearing_jacket.gif
     - assets/images/3d-modeling.png
     - assets/images/ruler-and-pencil.png
 
