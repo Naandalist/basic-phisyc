@@ -211,7 +211,7 @@ class _WeightConverterScreenState extends State<WeightConverterScreen> {
                     ],
                   ),
                 ),
-                child: Text('Konversi',
+                child: Text('Konversi Berat',
                     style: TextStyle(
                       fontSize: 20,
                       fontFamily: "Nunito",
