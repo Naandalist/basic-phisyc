@@ -15,6 +15,16 @@ class ErrorMessage {
         fontSize: 16.0);
   }
 
+  static void flashCenter(message) {
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        backgroundColor: Color(0xffeb3b5a),
+        textColor: Colors.white,
+        fontSize: 16.0);
+  }
+
   static void giffy(title, desc, context) {
     showDialog(
         context: context,
