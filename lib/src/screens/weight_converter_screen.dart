@@ -21,7 +21,6 @@ class _WeightConverterScreenState extends State<WeightConverterScreen> {
   );
   String _startWeight;
   String _convertedWeight;
-  double _numberForm;
   String _resultMessage;
 
   final List<String> _weightsUnit = [
