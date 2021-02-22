@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       },
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        // theme: ThemeData(primarySwatch: Colors.green, fontFamily: 'Nunito'),
+        theme: ThemeData(appBarTheme: AppBarTheme(color: (Color(0xff6D214F)))),
         home: LoginScreen(),
       ),
     );
