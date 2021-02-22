@@ -130,9 +130,9 @@ class _CountAreaScreenState extends State<CountAreaScreen> {
     } else if (!isNumeric(l)) {
       ErrorMessage.flashCenter("Lebar Harus Diisi Dengan Valid");
     } else if (double.parse(p) < 1) {
-      ErrorMessage.flashCenter("Panjang Harus Lebih Dari 1");
+      ErrorMessage.flashCenter("Panjang Harus Lebih Dari 0");
     } else if (double.parse(l) < 1) {
-      ErrorMessage.flashCenter("Lebar Harus Lebih Dari 1");
+      ErrorMessage.flashCenter("Lebar Harus Lebih Dari 0");
     } else if (double.parse(p) > 0 && double.parse(l) > 0) {
       double result = double.parse(p) * double.parse(l);
       showDialog(
