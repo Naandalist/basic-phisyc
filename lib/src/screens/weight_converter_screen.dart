@@ -24,11 +24,6 @@ class _WeightConverterScreenState extends State<WeightConverterScreen> {
   double _numberForm;
   String _resultMessage;
 
-  void initState() {
-    _numberForm = 0;
-    super.initState();
-  }
-
   final List<String> _weightsUnit = [
     'kilogram',
     'hektogram',
@@ -59,6 +54,8 @@ class _WeightConverterScreenState extends State<WeightConverterScreen> {
     '6': [1, 10, 100, 1000, 10000, 100000, 1000000],
   };
 
+  TextEditingController _numberFormController = TextEditingController();
+
   void convert(double value, String from, String to) {
     int nFrom = _weightsUnitMap[from];
     int nTo = _weightsUnitMap[to];
@@ -66,7 +63,7 @@ class _WeightConverterScreenState extends State<WeightConverterScreen> {
     var result = value * multiplier;
 
     _resultMessage =
-        '${_numberForm.toString()} $_startWeight sama dengan ${result.toString()} $_convertedWeight';
+        '${_numberFormController.text} $_startWeight sama dengan ${result.toString()} $_convertedWeight';
 
     setState(() {
       _resultMessage = _resultMessage;
@@ -159,6 +156,7 @@ class _WeightConverterScreenState extends State<WeightConverterScreen> {
             ),
             Spacer(),
             TextField(
+              controller: _numberFormController,
               keyboardType: TextInputType.number,
               style: inputStyle,
               decoration: InputDecoration(
@@ -174,14 +172,14 @@ class _WeightConverterScreenState extends State<WeightConverterScreen> {
                   border: OutlineInputBorder(),
                   fillColor: Color(0xFFFFFF),
                   filled: true),
-              onChanged: (text) {
-                var rv = double.tryParse(text);
-                if (rv != null) {
-                  setState(() {
-                    _numberForm = rv;
-                  });
-                }
-              },
+              // onChanged: (text) {
+              //   var rv = double.tryParse(text);
+              //   if (rv != null) {
+              //     setState(() {
+              //       _numberForm = rv;
+              //     });
+              //   }
+              // },
             ),
             Spacer(
               flex: 1,
@@ -191,12 +189,13 @@ class _WeightConverterScreenState extends State<WeightConverterScreen> {
               onPressed: () {
                 if (_startWeight == null || _convertedWeight == null) {
                   ErrorMessage.flashCenter('Satuan harus Dipilih');
-                } else if (_numberForm < 1) {
+                } else if (double.parse(_numberFormController.text) < 1) {
                   ErrorMessage.flashCenter('Input Harus Lebih dari Nol');
                 } else if (_startWeight == _convertedWeight) {
                   ErrorMessage.flashCenter('Satuan Tidak Boleh Sama');
                 } else {
-                  convert(_numberForm, _startWeight, _convertedWeight);
+                  convert(double.parse(_numberFormController.text),
+                      _startWeight, _convertedWeight);
                 }
               },
               child: Container(
@@ -212,7 +211,7 @@ class _WeightConverterScreenState extends State<WeightConverterScreen> {
                     ],
                   ),
                 ),
-                child: Text('Hitung',
+                child: Text('Konversi',
                     style: TextStyle(
                       fontSize: 20,
                       fontFamily: "Nunito",
