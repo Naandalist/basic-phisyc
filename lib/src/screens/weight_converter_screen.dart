@@ -93,7 +93,7 @@ class _WeightConverterScreenState extends State<WeightConverterScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: Text('Konversi Berat'),
+        title: Text('Konversi Panjang'),
       ),
       body: Container(
         color: Colors.white,
