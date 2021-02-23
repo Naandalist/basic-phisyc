@@ -172,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
     DataList(
       title: 'Konversi Nilai',
-      description: 'Ukuran Berat',
+      description: 'Ukuran Panjang',
       image: 'assets/animate/animation_500_counting.gif',
     ),
   ];
