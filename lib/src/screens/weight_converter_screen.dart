@@ -24,23 +24,23 @@ class _WeightConverterScreenState extends State<WeightConverterScreen> {
   String _resultMessage;
 
   final List<String> _weightsUnit = [
-    'kilogram',
-    'hektogram',
-    'dekagram',
-    'gram',
-    'desigram',
-    'centigram',
-    'miligram',
+    'kilometer',
+    'hektometer',
+    'dekameter',
+    'meter',
+    'desimeter',
+    'centimeter',
+    'milimeter',
   ];
 
   final Map<String, int> _weightsUnitMap = {
-    'kilogram': 0,
-    'hektogram': 1,
-    'dekagram': 2,
-    'gram': 3,
-    'desigram': 4,
-    'centigram': 5,
-    'miligram': 6,
+    'kilometer': 0,
+    'hektometer': 1,
+    'dekameter': 2,
+    'meter': 3,
+    'desimeter': 4,
+    'centimeter': 5,
+    'milimeter': 6,
   };
 
   dynamic _tableFormula = {
