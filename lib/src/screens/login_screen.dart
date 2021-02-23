@@ -133,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Container(
         child: Align(
             alignment: Alignment.centerLeft,
-            child: Text("Basic Phisyc",
+            child: Text("Fisika Dasar",
                 textScaleFactor: 1.5,
                 style: TextStyle(
                     fontFamily: "Nunito",
